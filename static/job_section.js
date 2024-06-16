@@ -81,7 +81,6 @@ function display_jb_description_file(display_folder){
         div_.innerHTML="<div class='cross-buttons' id='instance-jb-cross-button' onclick='display_jb_description_file(false)'>x</div>"+inputFile.name;
         //file_upload.style.border='none';
         document.getElementById('job-file-upload').style.border='none'
-        go_to_resume();
     }
     else{
         div_.style.display='none';

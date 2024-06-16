@@ -26,50 +26,46 @@
 <div class="container">
     <h1>Resume Screening</h1>
     <!--<button class="button" id='previous-button' onclick="go_to_jb()">previous</button>-->
-    
         <div id="uploading">
             <div id="jb">
                 <h2>Job Description</h2>
                 <div class="file-upload" id='job-file-upload'>
                     <div id="instance-job-description"></div>
-                    <label for="job-description-file" id="job-description-label"><p>Upload or Drop Job Description</p> <p> as .pdf or .docx file </p></label>
+                    <label for="job-description-file" id="job-description-label">Upload or Drop Job Description as .pdf or .docx file</label>
                     <input type="file" id="job-description-file" onchange="display_jb_description_file(true)" accept=".pdf,.docx">
                     <button class="jb-button" onClick="disable_job_file()" id='jb-copy-paste-button'> copy paste</button>
                 </div>
                 <div class="file-upload" id='job-file-upload-text'>
                     <textarea id="job-description-text" placeholder="Type or paste resumes here"></textarea>
                     <button class="jb-button" onClick="disable_job_text()" id='job-upload-button'>upload or drop</button>
-                    <button class='buttons' id='continue-button' onclick="go_to_resume()">continue</button>
                 </div>
             </div>
             <div id="resume">
                 <h2>Resume Upload</h2>
-                <div id='resume-file-upload'>
-                    <div id="instance-upload-file"></div>
-                    <label for="resume-content-file" id="resume-content-label">Upload or Drop Resume Content <p> as .pdf or .docx file </p></label>
-                    <input onchange="uploadResume()"type="file" id="resume-content-file" accept=".pdf,.docx" multiple>
-                    <button onClick="disable_resume_file()"  class='resume-button' id='resume-copy-paste-button'> copy paste</button>
+                <div id='resume-add'>
+                    <div id='resume-file-upload'>
+                        <div id="instance-upload-file"></div>
+                        <label for="resume-content-file" id="resume-content-label">Upload or Drop Resume Content  as .pdf or .docx file</label>
+                        <input onchange="uploadResume()"type="file" id="resume-content-file" accept=".pdf,.docx" multiple>
+                        <button onClick="disable_resume_file()"  class='resume-button' id='resume-copy-paste-button'> copy paste</button>
+                    </div>
+                    <div id='resume-file-upload-text'>
+                        <textarea id="resume-content-text" placeholder="Type or paste resumes here"></textarea>
+                        <button onClick="disable_resume_text()" class='resume-button' id="resume-upload-button">upload or drop</button> 
+                    </div>
+                    <button  id='add-resume-button' onclick="uploadResume()">Add</button>
                 </div>
-                <div id='resume-file-upload-text'>
-                    <textarea id="resume-content-text" placeholder="Type or paste resumes here"></textarea>
-                    <button onClick="disable_resume_text()" class='resume-button' id="resume-upload-button">upload or drop</button> 
-                </div>
-                <button  id='add-resume-button' onclick="uploadResume()">Add</button>
-            </div>
-        </div>
-        <div id='result'>
-            <div id='resume-list-outer-div'>
-                <h2>Uploaded Resume</h2>
-                <div id='resume-list-outer-div2'>
-                    <div id='resume-list-div'></div>
+                <div id='result'>
+                    <div id='resume-list-outer-div'>
+                        <h2>Uploaded Resume</h2>
+                            <div id='resume-list-div'></div>
+                    </div>
+                    <div id='submit-div'>
+                        <button class="button" id='remove-all-button' onClick="deleteAllResume()">Remove All</button>
+                        <button class="button" id="submit-button" onclick="submitResume()">Submit</button>
+                    </div>
                 </div>
             </div>
-            <div id='submit-div'>
-                <button class="button" id='remove-all-button' onClick="deleteAllResume()">Remove All</button>
-                <button class="button" id="submit-button" onclick="submitResume()">Submit</button>
-            </div>
-
-
         </div>
         <div id='rating'>
             <div id="heading-resume">
