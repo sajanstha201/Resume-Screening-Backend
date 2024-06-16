@@ -14,11 +14,19 @@ function display_rating_score(score){
     }
 }
 async function submitResume(){
+    get_job_description();
+    if(!jb_description_selected){
+            return;
+    }
+    if(!resumeSelected){
+        showAlert('No resume Selected','red')
+        return;
+    }
     document.getElementById('loader-box').style.display='flex';
     var rating_score=await request_posting()
     document.getElementById('loader-box').style.display='none';
-    go_to_rating()
     display_rating_score(rating_score);
+    document.getElementById('rating').style.display='flex';
  }
 async function request_token(){
     let token
