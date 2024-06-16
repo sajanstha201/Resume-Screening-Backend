@@ -43,13 +43,13 @@
             <div id="resume">
                 <h2>Resume Upload</h2>
                 <div id='resume-add'>
-                    <div id='resume-file-upload'>
+                    <div class='resume-upload' id='resume-file-upload'>
                         <div id="instance-upload-file"></div>
                         <label for="resume-content-file" id="resume-content-label">Upload or Drop Resume Content  as .pdf or .docx file</label>
                         <input onchange="uploadResume()"type="file" id="resume-content-file" accept=".pdf,.docx" multiple>
                         <button onClick="disable_resume_file()"  class='resume-button' id='resume-copy-paste-button'> copy paste</button>
                     </div>
-                    <div id='resume-file-upload-text'>
+                    <div class='resume-upload' id='resume-file-upload-text'>
                         <textarea id="resume-content-text" placeholder="Type or paste resumes here"></textarea>
                         <button onClick="disable_resume_text()" class='resume-button' id="resume-upload-button">upload or drop</button> 
                     </div>

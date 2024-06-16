@@ -57,7 +57,6 @@ function uploadResume() {
             objectStore.add({name:'Resume No '+formattedDateTime,content:textInput.value})
         transaction.oncomplete=(event)=>{
             console.log("Text resume added to the database");
-            
             showUploadedResume()
             textInput.value=''
         }
@@ -72,7 +71,6 @@ function uploadResume() {
             return;
         }
         activate_loader(true);
-        resume_upload_normal_form();
         const dbName = "resume_list";
         const request = indexedDB.open(dbName);
         request.onsuccess = async (event) => {
@@ -161,8 +159,6 @@ function uploadResume() {
             console.error(event.target.error);
         }
     }
-    
-    document.getElementById('result').style.display='flex';
 }
 //this is for showing all the uploaded file in the table form after adding
 function showUploadedResume() {
@@ -178,7 +174,6 @@ request.onsuccess = (event) => {
         const list=document.getElementById('resume-list-div');
         list.innerHTML=''
         if(allItems.length==0){
-            document.getElementById('result').style.display='none';
             resumeSelected=false;
         }
         resumeSelected=true;
@@ -229,44 +224,6 @@ function remove_pdf(event)
     
     
 }
-//this is for showing the selected files in the screen before adding it to the table
-function showSelectedResumeName(input_)
-{
-    const label=document.getElementById('resume-content-label')
-    const div_=document.getElementById('file-upload')
-    const files=input_.files;
-    const copy_paste=document.getElementById('resume-copy-paste-button')
-    label.style.display="none";
-    copy_paste.style.display="none";
-    var instance_list=document.getElementById('instance-upload-file')
-    instance_list.style.display="flex";
-    instance_list.innerHTML=""
-    if(files.length>3){
-        for( let i=0;i<4;i++){
-            instance_list.innerHTML+="<div class='pdf-img'><div class='cross-buttons' id='instance-file-cross-button' onclick='delete_instance_file(this)'>x</div><p>"+files[i].name+"</p></div>"
-        }
-        instance_list.innerHTML+="<div class='pdf-img'><p> . . . </p></div>"
-    }
-    else{
-        for( let i=0;i<files.length;i++){
-            instance_list.innerHTML+="<div class='pdf-img'><div class='cross-buttons' id='instance-file-cross-button' onclick='delete_instance_file(this)'>x</div><p>"+files[i].name+"</p></div>"
-        }
-        if(files.length===0){
-            label.style.display="block";
-            copy_paste.style.display="block";
-        }
-    }
-}
-//this is to convert the resume upload form to normal mode after addding the files that
-// is added by the used in the table
-function resume_upload_normal_form(){
-    const label=document.getElementById('resume-content-label');
-    const copy_paste=document.getElementById('resume-copy-paste-button')
-    const instance_list=document.getElementById('instance-upload-file')
-    label.style.display="block"
-    copy_paste.style.display="block";
-    instance_list.innerHTML=""
-}
 function extractTextFromPDF(pdfData) {
     pdfjsLib.getDocument(pdfData).promise.then(function(pdf) {
       let text = '';
@@ -288,6 +245,7 @@ function extractTextFromPDF(pdfData) {
   }
 
 //this function is to delete the resume uploaded and displayed on the screen but not added
+/*
 function delete_instance_file(div_){
     var pElement=div_.nextElementSibling;
     var instance_file=document.getElementById('instance-upload-file')
@@ -300,7 +258,7 @@ function delete_instance_file(div_){
     fileInput.files = dataTransfer.files;
     console.log(fileInput.files)
     showSelectedResumeName(fileInput)
-}
+}*/
 
 //this function when called retrives all the resume data stored in indexdb and stores it in the list of objects\dictionary  
 async function get_resume_details_from_indexdb(){
@@ -363,7 +321,6 @@ async function deleteAllResume() {
         };
 
         transaction.oncomplete = () => {
-            document.getElementById('result').style.display='none';
             console.log("Deleted all resumes");
         };
 

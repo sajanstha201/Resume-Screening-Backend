@@ -6,7 +6,7 @@ function get_job_description(){
     if(jb_file_activate){
         if(job_description_files.length===0){
             jb_description_selected=false;
-            showAlert("No file selected",'red')
+            showAlert("No Job Description file selected",'red')
             return;
         }
         jb_description_selected=true;
