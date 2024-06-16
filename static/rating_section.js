@@ -14,7 +14,6 @@ function display_rating_score(score){
     }
 }
 async function submitResume(){
-    get_job_description();
     if(!jb_description_selected){
             return;
     }

@@ -328,8 +328,7 @@ tr:hover {
     top:85%;
 }
 #rating{
-    height: 50%;
-    display: none;
+    display: flex;
     flex-direction: column;
 }
 #heading-resume {

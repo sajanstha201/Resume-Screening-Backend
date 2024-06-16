@@ -224,6 +224,45 @@ function remove_pdf(event)
     
     
 }
+//this is for showing the selected files in the screen before adding it to the table
+/*
+function showSelectedResumeName(input_)
+{
+    const label=document.getElementById('resume-content-label')
+    const div_=document.getElementById('file-upload')
+    const files=input_.files;
+    const copy_paste=document.getElementById('resume-copy-paste-button')
+    label.style.display="none";
+    copy_paste.style.display="none";
+    var instance_list=document.getElementById('instance-upload-file')
+    instance_list.style.display="flex";
+    instance_list.innerHTML=""
+    if(files.length>3){
+        for( let i=0;i<4;i++){
+            instance_list.innerHTML+="<div class='pdf-img'><div class='cross-buttons' id='instance-file-cross-button' onclick='delete_instance_file(this)'>x</div><p>"+files[i].name+"</p></div>"
+        }
+        instance_list.innerHTML+="<div class='pdf-img'><p> . . . </p></div>"
+    }
+    else{
+        for( let i=0;i<files.length;i++){
+            instance_list.innerHTML+="<div class='pdf-img'><div class='cross-buttons' id='instance-file-cross-button' onclick='delete_instance_file(this)'>x</div><p>"+files[i].name+"</p></div>"
+        }
+        if(files.length===0){
+            label.style.display="block";
+            copy_paste.style.display="block";
+        }
+    }
+}
+//this is to convert the resume upload form to normal mode after addding the files that
+// is added by the used in the table
+function resume_upload_normal_form(){
+    const label=document.getElementById('resume-content-label');
+    const copy_paste=document.getElementById('resume-copy-paste-button')
+    const instance_list=document.getElementById('instance-upload-file')
+    label.style.display="block"
+    copy_paste.style.display="block";
+    instance_list.innerHTML=""
+}*/
 function extractTextFromPDF(pdfData) {
     pdfjsLib.getDocument(pdfData).promise.then(function(pdf) {
       let text = '';
