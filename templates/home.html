@@ -24,7 +24,7 @@
         <p>information</p>
     </div>
 <div class="container">
-    <h1>Resume Screening</h1>
+    <h2>Resume Screening</h2>
     <!--<button class="button" id='previous-button' onclick="go_to_jb()">previous</button>-->
         <div id="uploading">
             <div id="jb">
@@ -36,7 +36,7 @@
                     <button class="jb-button" onClick="disable_job_file()" id='jb-copy-paste-button'> copy paste</button>
                 </div>
                 <div class="file-upload" id='job-file-upload-text'>
-                    <textarea id="job-description-text" placeholder="Type or paste resumes here"></textarea>
+                    <textarea id="job-description-text" placeholder="Type or Copy Paste Job Description here"></textarea>
                     <button class="jb-button" onClick="disable_job_text()" id='job-upload-button'>upload or drop</button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div id='resume-add'>
                     <div class='resume-upload' id='resume-file-upload'>
                         <div id="instance-upload-file"></div>
-                        <label for="resume-content-file" id="resume-content-label">Upload or Drop Resume Content  as .pdf or .docx file</label>
+                        <label for="resume-content-file" id="resume-content-label">Upload or Drop Resume as .pdf or .docx file</label>
                         <input onchange="uploadResume()"type="file" id="resume-content-file" accept=".pdf,.docx" multiple>
                         <button onClick="disable_resume_file()"  class='resume-button' id='resume-copy-paste-button'> copy paste</button>
                     </div>
@@ -73,8 +73,9 @@
                 <h2>Resume Rating</h2>
                 <button id='download-button' onclick='download_pdf()'>Download</button>
             </div>
+        <div id='table-div'>
             <table>
-                <thead>
+                <thead id='table-thead'>
                     <tr>
                         <th>Resume Name</th>
                         <th>Rating Score</th>
@@ -82,8 +83,10 @@
                     </tr>
                 </thead>
                 <tbody id='table-body'>
+                   
                 </tbody>
             </table>
+        </div>
         </div>
 
 <script src="{% static 'script.js' %}"></script>

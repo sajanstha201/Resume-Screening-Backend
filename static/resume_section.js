@@ -23,11 +23,10 @@ function check_duplicate_pdfname(pdfname){
             }
         }
         request.onerror = (event) => {
-            reject(event.target.error)
             console.error('Error retrieving items:', event.target.error);
+            reject(false)
         }
     })
-
 }
 // this is for uploading the selected file in the table
 function uploadResume() {
@@ -159,6 +158,8 @@ function uploadResume() {
             console.error(event.target.error);
         }
     }
+    console.log("sajan shre")
+    document.getElementById('result').style.opacity=1;
 }
 //this is for showing all the uploaded file in the table form after adding
 function showUploadedResume() {
@@ -361,6 +362,7 @@ async function deleteAllResume() {
 
         transaction.oncomplete = () => {
             console.log("Deleted all resumes");
+            document.getElementById('result').style.opacity=0;
         };
 
         transaction.onerror = (event) => {

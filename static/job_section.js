@@ -1,70 +1,84 @@
 //this is for saving the job description form text area or input file and that value wil be saved in the job description detail variable
 function get_job_description(){
-    const job_desc_pdf=document.getElementById('job-description-file')
-    const job_desc_text=document.getElementById('job-description-text')
-    const job_description_files=job_desc_pdf.files
-    if(jb_file_activate){
-        if(job_description_files.length===0){
-            jb_description_selected=false;
-            showAlert("No Job Description file selected",'red')
-            return;
-        }
-        jb_description_selected=true;
-        const reader = new FileReader()
-        let file=job_description_files[0]
-        reader.onload=(event)=>{
-            if(file.name.endsWith('.pdf')){
-                const typedArray = new Uint8Array(event.target.result);
-                var pdfData=typedArray
-                pdfjsLib.getDocument(pdfData).promise.then(function(pdf) {
-                    let text = '';
-                    const promises = [];
-                    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
-                        promises.push(pdf.getPage(pageNumber).then(function(page) {
-                        return page.getTextContent();
-                    }));
-                    }
-                    Promise.all(promises).then(function(textContents) {
-                        textContents.forEach(function(content) {
-                        content.items.forEach(function(item) {
-                            text += item.str + ' ';
+    return new Promise((resolve,reject)=>{
+    try{
+        const job_desc_pdf=document.getElementById('job-description-file')
+        const job_desc_text=document.getElementById('job-description-text')
+        const job_description_files=job_desc_pdf.files
+        if(jb_file_activate){
+            if(job_description_files.length===0){
+                jb_description_selected=false;
+                showAlert("No Job Description file selected",'red')
+                reject('No Job Description Selected');
+            }
+            jb_description_selected=true;
+            const reader = new FileReader()
+            let file=job_description_files[0]
+            reader.onload=(event)=>{
+                if(file.name.endsWith('.pdf')){
+                    const typedArray = new Uint8Array(event.target.result);
+                    var pdfData=typedArray
+                    pdfjsLib.getDocument(pdfData).promise.then(function(pdf) {
+                        let text = '';
+                        const promises = [];
+                        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+                            promises.push(pdf.getPage(pageNumber).then(function(page) {
+                            return page.getTextContent();
+                        }));
+                        }
+                        Promise.all(promises).then(function(textContents) {
+                            textContents.forEach(function(content) {
+                            content.items.forEach(function(item) {
+                                text += item.str + ' ';
+                                });
                             });
+                            job_description_details={
+                                'name':job_description_files[0].name,
+                                'content':text};
+                            resolve(true)
+                            
                         });
+                    });
+                }
+                else if(file.name.endsWith('.doc')||file.name.endsWith('.docx')){
+                    mammoth.extractRawText({arrayBuffer: event.target.result})
+                    .then((text)=>{
                         job_description_details={
                             'name':job_description_files[0].name,
-                            'content':text};
-                        
+                            'content':text.value};
+                        resolve(text.value)
+                    })
+                    .catch(function(error) {
+                        showAlert('Error During Reading the File','red')
+                        console.log(err);
+                    reject(error)
                     });
-                });
+                };
             }
-            else if(file.name.endsWith('.doc')||file.name.endsWith('.docx')){
-                mammoth.extractRawText({arrayBuffer: event.target.result})
-                .then((text)=>{
-                    job_description_details={
-                        'name':job_description_files[0].name,
-                        'content':text.value};
-                })
-                .catch(function(err) {
-                    showAlert('Error During Reading the File','red')
-                  console.log(err);
-                });
-            };
+            reader.onerror=(event)=>{
+                showAlert('Error During Reading the File','red')
+                console.error(event.target.error)
+                reject(event.target.error)
+            }
+            reader.readAsArrayBuffer(job_description_files[0]);
         }
-        reader.onerror=(event)=>{
-            showAlert('Error During Reading the File','red')
-            console.error(event.target.error)
+        else{
+            if(job_desc_text.value.trim()===""){
+                jb_description_selected=false;
+                showAlert("Empty Textarea",'red')
+                reject('Empty Textarea')
+            }
+            jb_description_selected=true;
+            job_description_details={name:job_desc_text.value.slice(0,20),content:job_desc_text.value}
+            resolve('selected the job description')
         }
-        reader.readAsArrayBuffer(job_description_files[0]);
     }
-    else{
-        if(job_desc_text.value.trim()===""){
-            jb_description_selected=false;
-            showAlert("Empty Textarea",'red')
-            return;
-        }
-        jb_description_selected=true;
-        job_description_details={name:job_desc_text.value.slice(0,20),content:job_desc_text.value}
+    catch(error){
+        console.log(error)
+        showAlert(error,'red')
+        reject(error)
     }
+})
 }
 //this will display the job description that was uploaded by the user as a box with the name of the folder
 function display_jb_description_file(display_folder){
