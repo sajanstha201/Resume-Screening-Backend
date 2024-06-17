@@ -65,8 +65,8 @@ function get_job_description(){
         else{
             if(job_desc_text.value.trim()===""){
                 jb_description_selected=false;
-                showAlert("Empty Textarea",'red')
-                reject('Empty Textarea')
+                showAlert("Empty Job Description Textarea",'red')
+                reject('Empty Job Description Textarea')
             }
             jb_description_selected=true;
             job_description_details={name:job_desc_text.value.slice(0,20),content:job_desc_text.value}

@@ -30,6 +30,7 @@ function check_duplicate_pdfname(pdfname){
 }
 // this is for uploading the selected file in the table
 function uploadResume() {
+    console.log('uploading the resume')
     document.getElementById('instance-upload-file').style.display='none';
     const fileInput=document.getElementById('resume-content-file')
     const textInput=document.getElementById('resume-content-text')
@@ -38,7 +39,7 @@ function uploadResume() {
     const request = indexedDB.open(dbName);
     if(!resume_file_activate){
         if(textInput.value.trim()===""){
-            showAlert("Empty Textarea",'red');
+            showAlert("Empty Resume Textarea",'red');
             return;
         }
         request.onsuccess=(event)=>{
@@ -66,7 +67,7 @@ function uploadResume() {
     }
     else{
         if(selectedFiles.length===0){
-            showAlert("No File Selected",'red')
+            showAlert("No Resume File Selected",'red')
             return;
         }
         activate_loader(true);
@@ -130,7 +131,7 @@ function uploadResume() {
                 fileReadPromises.push(fileReadPromise)
             }
             else{
-                const str='Duplicate Document Detected: '+file.name
+                const str='Duplicate Resume Detected: '+file.name
                 showAlert(str,'red')
             }
         }
@@ -175,15 +176,20 @@ request.onsuccess = (event) => {
         const list=document.getElementById('resume-list-div');
         list.innerHTML=''
         if(allItems.length==0){
+            document.getElementById('result').style.display='none';
             resumeSelected=false;
         }
-        resumeSelected=true;
-        for(let i=0;i<allItems.length;i++){   
-            id=allItems[i].name
-            const Text='<div id="resume-pdf"><p>'+allItems[i].name+'</p></div><div class="resume-cross-buttons" id="'+id+'" onclick="remove_pdf(this)">x</div>'
-            //const Text = '<tr><td>' + allItems[i].name + '</td><td><button type="button" id="'+id+'"onclick="remove_pdf(this)"> remove</button></td></tr>';
-            list.innerHTML=list.innerHTML+Text;
+        else{
+            document.getElementById('result').style.display='flex';
+            resumeSelected=true;
+            for(let i=0;i<allItems.length;i++){   
+                id=allItems[i].name
+                const Text='<div id="resume-pdf"><p>'+allItems[i].name+'</p></div><div class="resume-cross-buttons" id="'+id+'" onclick="remove_pdf(this)">x</div>'
+                //const Text = '<tr><td>' + allItems[i].name + '</td><td><button type="button" id="'+id+'"onclick="remove_pdf(this)"> remove</button></td></tr>';
+                list.innerHTML=list.innerHTML+Text;
+            }
         }
+
     }
     request.onerror = (event) => {
         console.error('Error retrieving items:', event.target.error);
