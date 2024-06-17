@@ -24,6 +24,7 @@ html,body{
     height:100%;
 }
 #resume{
+    position: relative;
    display:flex;
    width:100%;
    flex-direction:column;
@@ -298,6 +299,7 @@ tr:hover {
     width: 100%;
     flex-direction: column;
     height: 80%;
+    margin-top: 40px;
 }
 .resume-cross-buttons{
     height:10px;
@@ -402,13 +404,20 @@ th {
     border: none;
     background-color: white;
 }
+#add-resume-div{
+    position: absolute;
+    bottom:-45px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 #add-resume-button{
     display: none;
-    width: 100px;
-    height: 100px;
-    margin:30px;
+    width: 80px;
+    height: 40px;
     border-radius: 5px;
     background-color: #d4edda;
+    z-index: 10;
 }
 #submit-div{
     margin-top: 10px;
@@ -430,9 +439,11 @@ th {
     margin: 10px;
 }
 #resume-add{
+    position: relative;
     width:40%;
     height: 20%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 .resume-upload{
