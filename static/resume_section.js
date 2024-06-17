@@ -176,15 +176,20 @@ request.onsuccess = (event) => {
         const list=document.getElementById('resume-list-div');
         list.innerHTML=''
         if(allItems.length==0){
+            document.getElementById('result').style.display='none';
             resumeSelected=false;
         }
-        resumeSelected=true;
-        for(let i=0;i<allItems.length;i++){   
-            id=allItems[i].name
-            const Text='<div id="resume-pdf"><p>'+allItems[i].name+'</p></div><div class="resume-cross-buttons" id="'+id+'" onclick="remove_pdf(this)">x</div>'
-            //const Text = '<tr><td>' + allItems[i].name + '</td><td><button type="button" id="'+id+'"onclick="remove_pdf(this)"> remove</button></td></tr>';
-            list.innerHTML=list.innerHTML+Text;
+        else{
+            document.getElementById('result').style.display='flex';
+            resumeSelected=true;
+            for(let i=0;i<allItems.length;i++){   
+                id=allItems[i].name
+                const Text='<div id="resume-pdf"><p>'+allItems[i].name+'</p></div><div class="resume-cross-buttons" id="'+id+'" onclick="remove_pdf(this)">x</div>'
+                //const Text = '<tr><td>' + allItems[i].name + '</td><td><button type="button" id="'+id+'"onclick="remove_pdf(this)"> remove</button></td></tr>';
+                list.innerHTML=list.innerHTML+Text;
+            }
         }
+
     }
     request.onerror = (event) => {
         console.error('Error retrieving items:', event.target.error);
