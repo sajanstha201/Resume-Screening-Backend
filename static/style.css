@@ -35,7 +35,7 @@ html,body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin:20px;
+    margin-top:40px;
     width:70%;
     height: 65%;
     margin-bottom: 0px;
@@ -299,7 +299,6 @@ tr:hover {
     width: 100%;
     flex-direction: column;
     height: 80%;
-    margin-top: 40px;
 }
 .resume-cross-buttons{
     height:10px;
@@ -337,6 +336,7 @@ tr:hover {
     flex-direction: column;
     align-items: center;
     height: 70vh;
+    margin-top: 100px;
 }
 #heading-resume {
     text-align: center;
