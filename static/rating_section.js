@@ -14,11 +14,20 @@ function display_rating_score(score){
     }
 }
 async function submitResume(){
+    const response=await get_job_description()
+    if(!jb_description_selected){
+        showAlert('No Job Description Selected','red')
+            return;
+    }
+    if(!resumeSelected){
+        showAlert('No Resume Selected','red')
+        return;
+    }
     document.getElementById('loader-box').style.display='flex';
     var rating_score=await request_posting()
     document.getElementById('loader-box').style.display='none';
-    go_to_rating()
     display_rating_score(rating_score);
+    document.getElementById('rating').style.display='flex';
  }
 async function request_token(){
     let token
@@ -31,14 +40,12 @@ async function request_token(){
     }).catch(error=>{
         console.log(error)
     })
-    console.log(token)
     return token.token
 }
  async function request_posting(){
     return new Promise(async (resolve,reject)=>{
         const csrfToken = await request_token();
         var resume_data=await get_resume_details_from_indexdb();
-        console.log(resume_data)
         await fetch('http://127.0.0.1:8000/get-rating/?format=json',{
             method:'POST',
             headers: {
@@ -53,13 +60,13 @@ async function request_token(){
                 }
                 showAlert('GOT SOME ERROR!!','red')
                 document.getElementById('loader-box').style.display='none';
-                reject('error detected')
+                reject('Error Detected')
             }).then((data)=>{
                 resolve(data);
             }).catch(error=>{
                 showAlert('GOT SOME ERROR!!: ','red')
                 document.getElementById('loader-box').style.display='none';
-                reject(error.target.value)
+                reject('Error',error)
             })
     })
 }

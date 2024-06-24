@@ -23,14 +23,14 @@ function check_duplicate_pdfname(pdfname){
             }
         }
         request.onerror = (event) => {
-            reject(event.target.error)
             console.error('Error retrieving items:', event.target.error);
+            reject(false)
         }
     })
-
 }
 // this is for uploading the selected file in the table
 function uploadResume() {
+    console.log('uploading the resume')
     document.getElementById('instance-upload-file').style.display='none';
     const fileInput=document.getElementById('resume-content-file')
     const textInput=document.getElementById('resume-content-text')
@@ -39,7 +39,7 @@ function uploadResume() {
     const request = indexedDB.open(dbName);
     if(!resume_file_activate){
         if(textInput.value.trim()===""){
-            showAlert("Empty Textarea",'red');
+            showAlert("Empty Resume Textarea",'red');
             return;
         }
         request.onsuccess=(event)=>{
@@ -57,7 +57,6 @@ function uploadResume() {
             objectStore.add({name:'Resume No '+formattedDateTime,content:textInput.value})
         transaction.oncomplete=(event)=>{
             console.log("Text resume added to the database");
-            
             showUploadedResume()
             textInput.value=''
         }
@@ -68,11 +67,10 @@ function uploadResume() {
     }
     else{
         if(selectedFiles.length===0){
-            showAlert("No File Selected",'red')
+            showAlert("No Resume File Selected",'red')
             return;
         }
         activate_loader(true);
-        resume_upload_normal_form();
         const dbName = "resume_list";
         const request = indexedDB.open(dbName);
         request.onsuccess = async (event) => {
@@ -133,7 +131,7 @@ function uploadResume() {
                 fileReadPromises.push(fileReadPromise)
             }
             else{
-                const str='Duplicate Document Detected: '+file.name
+                const str='Duplicate Resume Detected: '+file.name
                 showAlert(str,'red')
             }
         }
@@ -161,8 +159,8 @@ function uploadResume() {
             console.error(event.target.error);
         }
     }
-    
-    document.getElementById('result').style.display='flex';
+    console.log("sajan shre")
+    document.getElementById('result').style.opacity=1;
 }
 //this is for showing all the uploaded file in the table form after adding
 function showUploadedResume() {
@@ -181,13 +179,17 @@ request.onsuccess = (event) => {
             document.getElementById('result').style.display='none';
             resumeSelected=false;
         }
-        resumeSelected=true;
-        for(let i=0;i<allItems.length;i++){   
-            id=allItems[i].name
-            const Text='<div id="resume-pdf"><p>'+allItems[i].name+'</p></div><div class="resume-cross-buttons" id="'+id+'" onclick="remove_pdf(this)">x</div>'
-            //const Text = '<tr><td>' + allItems[i].name + '</td><td><button type="button" id="'+id+'"onclick="remove_pdf(this)"> remove</button></td></tr>';
-            list.innerHTML=list.innerHTML+Text;
+        else{
+            document.getElementById('result').style.display='flex';
+            resumeSelected=true;
+            for(let i=0;i<allItems.length;i++){   
+                id=allItems[i].name
+                const Text='<div id="resume-pdf"><p>'+allItems[i].name+'</p></div><div class="resume-cross-buttons" id="'+id+'" onclick="remove_pdf(this)">x</div>'
+                //const Text = '<tr><td>' + allItems[i].name + '</td><td><button type="button" id="'+id+'"onclick="remove_pdf(this)"> remove</button></td></tr>';
+                list.innerHTML=list.innerHTML+Text;
+            }
         }
+
     }
     request.onerror = (event) => {
         console.error('Error retrieving items:', event.target.error);
@@ -230,6 +232,7 @@ function remove_pdf(event)
     
 }
 //this is for showing the selected files in the screen before adding it to the table
+/*
 function showSelectedResumeName(input_)
 {
     const label=document.getElementById('resume-content-label')
@@ -266,7 +269,7 @@ function resume_upload_normal_form(){
     label.style.display="block"
     copy_paste.style.display="block";
     instance_list.innerHTML=""
-}
+}*/
 function extractTextFromPDF(pdfData) {
     pdfjsLib.getDocument(pdfData).promise.then(function(pdf) {
       let text = '';
@@ -288,6 +291,7 @@ function extractTextFromPDF(pdfData) {
   }
 
 //this function is to delete the resume uploaded and displayed on the screen but not added
+/*
 function delete_instance_file(div_){
     var pElement=div_.nextElementSibling;
     var instance_file=document.getElementById('instance-upload-file')
@@ -300,7 +304,7 @@ function delete_instance_file(div_){
     fileInput.files = dataTransfer.files;
     console.log(fileInput.files)
     showSelectedResumeName(fileInput)
-}
+}*/
 
 //this function when called retrives all the resume data stored in indexdb and stores it in the list of objects\dictionary  
 async function get_resume_details_from_indexdb(){
@@ -363,8 +367,8 @@ async function deleteAllResume() {
         };
 
         transaction.oncomplete = () => {
-            document.getElementById('result').style.display='none';
             console.log("Deleted all resumes");
+            document.getElementById('result').style.opacity=0;
         };
 
         transaction.onerror = (event) => {
