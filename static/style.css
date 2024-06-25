@@ -81,14 +81,14 @@ html,body{
 #job-file-upload-text textarea,#resume-file-upload-text textarea{
     width:90%;
     height:90%;
-    border-color:white;
+    border-color:#adcbe3;
 }
 #job-file-upload-text textarea:focus,#resume-file-upload-text textarea:focus{
     outline:none;
 }
 
 .jb-button{
-    border:none;
+    border-radius: 0.5pc;
     position:absolute;
     bottom: 0px;
     background-color:white;
@@ -96,7 +96,7 @@ html,body{
     cursor:pointer;
 }
 .resume-button{
-    border:none;
+    border-radius: 0.5pc;
     position: absolute;
     bottom: 0px;
     background-color:white;
