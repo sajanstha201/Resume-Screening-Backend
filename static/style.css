@@ -1,6 +1,7 @@
 html,body{
     height: 100%;
     text-align: center;
+    background-color: #E7eff6;
 }
 .container{
     display:flex;
@@ -51,6 +52,7 @@ html,body{
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    background-color: #adcbe3;
 }
 #resume-file-upload,#resume-file-upload-text{
     display:flex;
@@ -63,6 +65,7 @@ html,body{
     margin:0px;
     border-color:black;
     height: 100%;
+    background-color: #adcbe3;
 
 }
 #job-file-upload{
@@ -116,6 +119,7 @@ html,body{
     width:50%;
     height:30%;
     cursor: pointer;
+    background-color:#dfe3ee;
 }
 .button{
     width:100px;
@@ -127,7 +131,11 @@ html,body{
     display:none;
 }
 #submit-button{
-    background-color: #d4edda;
+    background-color: #bfd6f6;
+    
+}
+#submit-button:hover{
+    background-color: #4d648d;
 }
 table {
     width: 40%;
@@ -221,7 +229,7 @@ tr:hover {
     padding: 20px;
     align-items: center;
     justify-content: center;
-    background:#d4edda;
+    background:#8b9dc3;
     border: 1px solid #ccc;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -274,7 +282,7 @@ tr:hover {
     border-radius:10px;
     margin:10px;
     padding:10px;
-    background: #d4edda;
+    background: #8b9dc3;
     border: 1px solid #ccc;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -397,7 +405,7 @@ th {
     height: 30px;
     width: 80px;
     margin-left: 40px;
-    background-color: #d4edda;
+    background-color: #a7d4b2;
     border-radius: 5px;
 }
 .copy-paste-button{
@@ -424,7 +432,10 @@ th {
     display: flex;
 }
 #remove-all-button{
-    background-color: lightcoral;
+    background-color: #ff8c00;
+}
+#remove-all-button:hover{
+    background-color: #c46704;
 }
 .active{
     border-color: yellowgreen;
