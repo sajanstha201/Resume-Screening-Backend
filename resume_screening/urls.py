@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import home,response_,rating_response,token_response
+from .views import home,response_,rating_response,token_response,postRequest
 urlpatterns = [
     path("",home),
     path("response/",response_),
     path("get-rating/",rating_response),
-    path("get-token/",token_response)
+    path("get-token/",token_response),
+    path("post-request/",postRequest)
 ]

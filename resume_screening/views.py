@@ -30,6 +30,10 @@ def rating_response(request):
         return response
     else:
         return JsonResponse(rating_score)
+def postRequest(request):
+    print('sajan shrestha')
+    return HttpResponse('<h1>hello</h1>')
 
 def token_response(request):
+    print('token request got successfully')
     return JsonResponse({'token':get_token(request)})
