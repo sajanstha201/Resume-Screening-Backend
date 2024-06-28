@@ -10,7 +10,7 @@ def rating(jb_description,resume_dict):
         lemmatized_resume=lemmatize_text(resume)
         match_score=calculate_match_score(critical_list=critical_keyword,text_list=lemmatized_resume)
         similar_score=find_cosine_similarity2(jb_description,resume)
-        score_dict[key]=math.ceil((similar_score*15+match_score*25))
+        score_dict[key]=math.ceil(match_score*10)
     ordered_score=ordering_dict(score_dict)
     return ordered_score,make_pdf(ordered_score)
 
