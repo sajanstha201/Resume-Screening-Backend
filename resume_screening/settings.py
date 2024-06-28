@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-m===e^8ecoxhr91ij+g@4cr(tri&vjed#^s^bc6^$=xeogsk15
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 # Application definition
 
@@ -40,15 +40,18 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Ensure this is before AuthenticationMiddleware
+    'corsheaders.middleware.CorsMiddleware', 
+    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # If you are using CORS middleware
 ]
+
+
 
 ROOT_URLCONF = "resume_screening.urls"
 
@@ -124,9 +127,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assests')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+
+
+
 
 
 # If you want to allow only specific origins, comment out the above line and uncomment the below lines
@@ -135,8 +138,10 @@ CORS_ALLOWED_ORIGINS = [
 # ]
 
 # CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
-# settings.py
 
+CSRF_TRUSTED_ORIGINS=[
+    "http://localhost:3000",
+]

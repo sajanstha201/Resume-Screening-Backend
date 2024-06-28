@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from io import BytesIO
 import json
 from .ml_model.main import rating
+from django.views.decorators.csrf import csrf_exempt
+
 def home(request):
     return render(request,'home.html')
 
@@ -14,6 +16,7 @@ def response_(request):
         'age':'30'
     })
     
+@csrf_exempt
 def rating_response(request):
     data=request.body.decode('utf-8')
     data_dict = json.loads(data)
@@ -30,6 +33,8 @@ def rating_response(request):
         return response
     else:
         return JsonResponse(rating_score)
+
+@csrf_exempt
 def postRequest(request):
     print('sajan shrestha')
     return HttpResponse('<h1>hello</h1>')
