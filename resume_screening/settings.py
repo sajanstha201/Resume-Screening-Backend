@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-m===e^8ecoxhr91ij+g@4cr(tri&vjed#^s^bc6^$=xeogsk15
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 ROOT_URLCONF = "resume_screening.urls"
