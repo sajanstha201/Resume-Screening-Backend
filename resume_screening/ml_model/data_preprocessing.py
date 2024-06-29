@@ -1,17 +1,11 @@
 import nltk
 from pathlib import Path
 import os
-
-nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
-
-# No need to download packages every time
-# nltk.download('punkt')
-# nltk.download('averaged_perceptron_tagger')
-# nltk.download('wordnet')
-
+nltk.download('punkt', download_dir='./nltk_data')
+nltk.download('averaged_perceptron_tagger', download_dir='./nltk_data')
+nltk.download('wordnet', download_dir='./nltk_data')
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-
 def remove_common_words(lemmas):
   current_dir=Path(__file__).parent
   with open(os.path.join(current_dir,'common_words_in_jb_description.txt'),'r') as file:
