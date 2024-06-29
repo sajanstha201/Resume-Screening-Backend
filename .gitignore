@@ -2,3 +2,4 @@ my_env
 myenvs
 .dist
 node_modules
+.vercel
