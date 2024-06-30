@@ -22,17 +22,8 @@ def rating_response(request):
     data_dict = json.loads(data)
     job_description=data_dict['job_description']
     resume_detail=data_dict['resume_detail']
-    rating_score,csv_score=rating(jb_description=job_description,resume_dict=resume_detail)
-    request_format=request.GET.get('format','json')
-    if(request_format=='csv'):
-        buffer=BytesIO()
-        csv_score.to_csv(buffer,index=False)
-        buffer.seek(0)
-        response=HttpResponse(buffer,content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="dataframe.csv"'
-        return response
-    else:
-        return JsonResponse(rating_score)
+    rating_score=rating(jb_description=job_description,resume_dict=resume_detail)
+    return JsonResponse(rating_score)
 
 @csrf_exempt
 def postRequest(request):

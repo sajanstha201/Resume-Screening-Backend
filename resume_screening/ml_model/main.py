@@ -13,7 +13,7 @@ def rating(jb_description,resume_dict):
         # similar_score=find_cosine_similarity2(jb_description,resume)
         score_dict[key]=math.ceil(match_score*10)
     ordered_score=ordering_dict(score_dict)
-    return ordered_score,make_pdf(ordered_score)
+    return ordered_score
 
 #use this function when the user give a seprate file for critical keyword
 # def rating2(jb_description,resume_dict,critical_keywords):
