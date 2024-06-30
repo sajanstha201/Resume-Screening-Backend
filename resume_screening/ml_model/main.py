@@ -11,7 +11,7 @@ def rating(jb_description,resume_dict):
         lemmatized_resume=lemmatize_text(resume)
         match_score=calculate_match_score(critical_list=critical_keyword,text_list=lemmatized_resume)
         # similar_score=find_cosine_similarity2(jb_description,resume)
-        score_dict[key]=math.ceil(match_score*10)
+        score_dict[key]=math.ceil(match_score*100)
     ordered_score=ordering_dict(score_dict)
     return ordered_score
 
@@ -37,8 +37,8 @@ def ordering_dict(score):
         new_dict[max_key]=score[max_key]
         score.pop(max_key)
     for key,value in new_dict.items():
-        if(value>10):
-            new_dict[key]=10
+        if(value>100):
+            new_dict[key]=100
     return new_dict
 # def make_pdf(score):
 #     key_list=[]
