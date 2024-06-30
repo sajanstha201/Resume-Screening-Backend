@@ -3,3 +3,4 @@ myenvs
 .dist
 node_modules
 .vercel
+resume_screening/__pycache__
