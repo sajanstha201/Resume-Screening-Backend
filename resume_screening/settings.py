@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-m===e^8ecoxhr91ij+g@4cr(tri&vjed#^s^bc6^$=xeogsk15
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','http://localhost:3000']
+ALLOWED_HOSTS = ['*','http://localhost:3000','https://sajanstha201.github.io' ]
 
 # Application definition
 
@@ -140,10 +140,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ]
 
 # CSRF Trusted Origins
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://sajanstha.github.io',
 ]
 
 CSRF_TRUSTED_ORIGINS=[
     "http://localhost:3000",
+    'https://sajanstha.github.io',
 ]
